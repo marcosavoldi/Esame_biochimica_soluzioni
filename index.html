@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Domande e Risposte</title>
+    <style>
+        /* ===========================
+   Variabili CSS
+=========================== */
+        :root {
+            --primary-color: #0073e6;
+            --secondary-color: #fff;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --font-family: Arial, sans-serif;
+            --max-width: 800px;
+            --border-radius: 5px;
+            --padding: 1rem;
+            --font-size-base: 1rem;
+            --line-height-base: 1.5;
+        }
+
+        /* ===========================
+   Stili Globali
+=========================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            margin: 0;
+            padding-top: 70px;
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+        }
+
+        /* ===========================
+   Barra di Ricerca
+=========================== */
+        .search-bar-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            padding: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .search-bar-container input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+        }
+
+        /* ===========================
+   Contenitore FAQ
+=========================== */
+        .faq-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===========================
+   Domande e Risposte
+=========================== */
+        .question,
+        .answer {
+            padding: var(--padding);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .question {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .answer {
+            border: 1px solid #ddd;
+            border-top: none;
+            background-color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* ===========================
+   Responsive Design
+=========================== */
+        @media (max-width: 768px) {
+            :root {
+                --font-size-base: 1.1rem;
+                --padding: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .search-bar-container {
+                padding: 0.75rem;
+            }
+
+            .search-bar-container input[type="text"] {
+                padding: 0.75rem;
+                font-size: 1.1rem;
+            }
+
+            .question,
+            .answer {
+                padding: var(--padding);
+                font-size: var(--font-size-base);
+            }
+
+            .question {
+                margin-bottom: 0.75rem;
+            }
+
+            .answer {
+                margin-bottom: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --font-size-base: 1.2rem;
+                --padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .search-bar-container {
+                padding: 1rem;
+            }
+
+            .search-bar-container input[type="text"] {
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .question,
+            .answer {
+                padding: var(--padding);
+                font-size: var(--font-size-base);
+            }
+
+            .question {
+                margin-bottom: 1rem;
+            }
+
+            .answer {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra di ricerca fissa -->
+    <div class="search-bar-container">
+        <input type="text" id="search-bar" placeholder="Cerca una domanda...">
+    </div>
+
+    <h1>Elenco Domande e Risposte</h1>
+
+    <div class="faq-container" id="faq-container">
+        <div class="faq-item">
+            <div class="question">Alti livelli di lipasi nel siero indicano un danno:</div>
+            <div class="answer">Pancreatico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Con architettura del dosaggio immunologico s'intende il processo attraverso cui si
+                evidenzia:</div>
+            <div class="answer">L'analita</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Con i metodi analitici usati nei laboratori diagnostici si arriva generalmente a
+                determinare:</div>
+            <div class="answer">La concentrazione di una sostanza in un campione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Con il termine di misurazione si intende:</div>
+            <div class="answer">Tutte le risposte precedenti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Della creatinchinasi esistono:</div>
+            <div class="answer">Tre isoenzimi diversi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Fondamentalmente in un laboratorio di analisi medica si eseguono:</div>
+            <div class="answer">Delle misurazioni</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli AGE sono gel di:</div>
+            <div class="answer">Agarosio</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli aghi per i prelievi hanno un gauge:</div>
+            <div class="answer">19-23</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli analiti possono variare in funzione:</div>
+            <div class="answer">Tutte le risposte precedenti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli anticoagulanti sono necessari per ottenere:</div>
+            <div class="answer">Il plasma</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli anticorpi hanno una caratteristica struttura:</div>
+            <div class="answer">Quaternaria a forma di Y</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli anticorpi più comunemente utilizzati per lo sviluppo dei metodi immunochimici
+                sono:</div>
+            <div class="answer">IgG</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli anticorpi policlonali si ottengono:</div>
+            <div class="answer">Immunizzando un animale con l'antigene contro cui si vuole produrre l'anticorpo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli antigeni sono riconosciuti dalle regioni:</div>
+            <div class="answer">Variabili degli anticorpi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli enzimi si possono trovare nel sangue:</div>
+            <div class="answer">Sia in condizioni fisiologiche che patologiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli enzimi sono delle macromolecole proteiche che:</div>
+            <div class="answer">Tutte le risposte precedenti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli enzimi vengono misurati per:</div>
+            <div class="answer">La loro attività</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli errori casuali sono:</div>
+            <div class="answer">Parzialmente prevedibili</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli errori di misura non sono dovuti a:</div>
+            <div class="answer">Nessuna delle risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Gli errori sistematici dipendono:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I calibratori generalmente possono essere:</div>
+            <div class="answer">Stabili limitatamente se conservati in frigorifero</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I campioni itterici contengono elevate concentrazioni di:</div>
+            <div class="answer">Bilirubina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I chilomicroni trasportano prevalentemente:</div>
+            <div class="answer">Trigliceridi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I coenzimi durante la reazione enzimatica:</div>
+            <div class="answer">Modificano la loro struttura ma possono essere riconvertiti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I componenti maggiori nel sangue sono:</div>
+            <div class="answer">Eritrociti>Piastrine>Linfociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I dosaggi immunochimici si basano sulla:</div>
+            <div class="answer">Specificità della reazione antigene-anticorpo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I geni dell'MHC di classe I non sono espressi:</div>
+            <div class="answer">Dagli eritrociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I metodi a sandwich sono anche detti metodi:</div>
+            <div class="answer">Non competitivi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I metodi competitivi possono essere definiti:</div>
+            <div class="answer">Difetto di anticorpo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I metodi indiretti utilizzati nei laboratori diagnostici consentono di:</div>
+            <div class="answer">Tutte le risposte precedenti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I metodi non competitivi a differenza dei metodi competitivi presentano:</div>
+            <div class="answer">Una maggiore specificità e una maggiore sensibilità</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I metodi più utilizzati per separare il libero dal legato sono:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I PAGE sono gel di:</div>
+            <div class="answer">Acrilamide</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I traccianti fluorescenti sono molecole che eccitate con una fonte luminosa di una
+                certa lunghezza d'onda, riemettono una luce a:</div>
+            <div class="answer">Una lunghezza d'onda generalmente maggiore</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I vacutainer con il tappo giallo si usano per ottenere:</div>
+            <div class="answer">Siero</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I valori di riferimento di una grandezza biologica sono:</div>
+            <div class="answer">Quei valori che più frequentemente vengono riscontrati in una popolazione sana.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I vantaggi dei traccianti radioattivi sono:</div>
+            <div class="answer">Segnale molto specifico e ingombro sterico molto basso</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il caffè prima di un prelievo può alterare i livelli di glucosio per:</div>
+            <div class="answer">La presenza di caffeina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il calciferolo è:</div>
+            <div class="answer">Vitamina D</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il calcio è importante per:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il ciclo dell'urea avviene nel:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il cloro è il principale anione:</div>
+            <div class="answer">Extracellulare</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il cobalto è presente nella vitamina:</div>
+            <div class="answer">B12</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il colesterolo totale comprende:</div>
+            <div class="answer">LDL e HDL</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il colesterolo è sintetizzato a partire da:</div>
+            <div class="answer">Acetil-CoA</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il cortisolo, l'ormone dello stress, presenta delle variazioni:</div>
+            <div class="answer">Diurne</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il deficit di ferro porta ad un'anemia:</div>
+            <div class="answer">Microcitica e ipocromica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il fattore reumatoide è una:</div>
+            <div class="answer">Gamma globulina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il ferro è assorbito prevalentemente nel:</div>
+            <div class="answer">Duodeno</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il ferro è trasportato nel plasma dalla:</div>
+            <div class="answer">Transferrina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il fluoro è importante per la formazione di:</div>
+            <div class="answer">Smalto dei denti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il fosforo è un costituente:</div>
+            <div class="answer">Degli acidi nucleici</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il fumo di sigaretta prima di un prelievo può aumentare i livelli di:</div>
+            <div class="answer">Leucociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il glicerolo serve per:</div>
+            <div class="answer">Appesantire le proteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il livello di colesterolo:</div>
+            <div class="answer">E' più alto negli uomini</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il luminolo emette fotoni di energia in presenza di:</div>
+            <div class="answer">Una perossidasi e acqua ossigenata</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il maggior vantaggio della CE è:</div>
+            <div class="answer">Rapidità di analisi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il magnesio è un cofattore di:</div>
+            <div class="answer">Enzimi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il manganese è un cofattore per enzimi coinvolti nel metabolismo:</div>
+            <div class="answer">Dei carboidrati</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il mieloma multiplo colpisce prevalentemente le persone sopra i:</div>
+            <div class="answer">60 anni</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il misurando è:</div>
+            <div class="answer">L'oggetto o il fenomeno da misurare</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il paratormone (PTH) regola il metabolismo del:</div>
+            <div class="answer">Calcio</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il peptide natriuretico atriale (ANP) è prodotto dal:</div>
+            <div class="answer">Cuore</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il plasma si ottiene centrifugando il sangue:</div>
+            <div class="answer">Con anticoagulanti a 3000 rpm</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il plasma è simile:</div>
+            <div class="answer">Al sangue ma senza la frazione corpuscolata</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il potassio è il principale catione:</div>
+            <div class="answer">Intracellulare</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il principale vantaggio dei metodi competitivi è che possono riconoscere:</div>
+            <div class="answer">Qualsiasi antigene indipendentemente dalle dimensioni</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il rame è un componente di numerosi:</div>
+            <div class="answer">Enzimi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il ruolo principale dell'aptoglobina è:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il sangue capillare contiene:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il sangue costituisce:</div>
+            <div class="answer">8% del peso del corpo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il sangue è un tessuto:</div>
+            <div class="answer">Connettivale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il segnale misurato da un metodo non competitivo è graficamente rappresentato da:
+            </div>
+            <div class="answer">Una sigmoide</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il selenio è importante per la funzione:</div>
+            <div class="answer">Antiossidante</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il siero è simile:</div>
+            <div class="answer">Al plasma ma senza i fattori della coagulazione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il sodio è il principale catione:</div>
+            <div class="answer">Extracellulare</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il valore della bilirubina può essere alterato da:</div>
+            <div class="answer">Digiuno</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il valore della ferritina è più alto nei:</div>
+            <div class="answer">Uomini</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il volume del sangue varia in funzione:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Il β-Mercaptoetanolo è un agente:</div>
+            <div class="answer">Denaturante</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In biochimica clinica vengono prevalentemente utilizzati:</div>
+            <div class="answer">Sia metodi diretti che indiretti di misurazione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In biochimica clinica è importante stabilire:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In caso di aumento dell'ALT con AST nei limiti si può pensare a problemi per:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In termini di appropriatezza, sono maggiori gli esami diagnostichi:</div>
+            <div class="answer">Sottoutilizzati</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In un elettroforesi su campione sierico l'albumina rispetto alla gamma globuline
+                migra:</div>
+            <div class="answer">Più velocemente</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">In un sistema elettroforetico le molecole si separano tra di loro in base:</div>
+            <div class="answer">Alla carica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'acido folico appartiene al gruppo delle vitamine:</div>
+            <div class="answer">B</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'acido pantotenico è anche detto vitamina:</div>
+            <div class="answer">B5</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'acido urico è un prodotto finale del metabolismo delle:</div>
+            <div class="answer">Purine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'albumina può diminuire nel sangue in seguito a:</div>
+            <div class="answer">Nessuna delle risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'albumina è prodotta maggiormente nel:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'aldosterone agisce principalmente a livello del:</div>
+            <div class="answer">Rene</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'alfa1-antitripsina ha un ruolo protettivo nei confronti:</div>
+            <div class="answer">Dei polmoni</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'amilasi è un enzima maggiormente espresso nel:</div>
+            <div class="answer">Pancreas e ghiandole salivari</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ammoniaca nel sangue aumenta in caso di alterazione della funzione:</div>
+            <div class="answer">Epatica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ammoniaca è tossica per il:</div>
+            <div class="answer">Sistema nervoso centrale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'antigene è una molecola che:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'appropriatezza nella medicina di laboratorio riguarda soprattutto:</div>
+            <div class="answer">Appropriatezza prescrittiva</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'assenza di componente monoclonale:</div>
+            <div class="answer">Non garantisce l'assenza di una gammopatia</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'attività di un enzima determina:</div>
+            <div class="answer">Diminuzione del substrato e aumento del prodotto</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'aumento della temperatura in un sistema elettroforetico:</div>
+            <div class="answer">Nessuna delle risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'azotemia aumenta in caso di:</div>
+            <div class="answer">Insufficienza renale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'azoto ureico è il principale prodotto dell'eliminazione dell'azoto con:</div>
+            <div class="answer">Le urine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'EDTA altera la morfologia:</div>
+            <div class="answer">Delle piastrine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'elettroforesi 2D combina:</div>
+            <div class="answer">L'isolettrofocalizzazione e la SDS-PAGE</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'elettroforesi su acetato di cellulosa è utilizzata particolarmente in ambito clinico
+                per separare:</div>
+            <div class="answer">Proteine plasmatiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina A1c è utilizzata come indice:</div>
+            <div class="answer">Del metabolismo glucidico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina fetale HbF scompare al:</div>
+            <div class="answer">Sesto mese di vita</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina glicosilata (HbA1c) è un indicatore del controllo a lungo termine della:
+            </div>
+            <div class="answer">Glicemia</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina è composta da:</div>
+            <div class="answer">4 subunità e 4 gruppi prostetici</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina è contenuta:</div>
+            <div class="answer">Negli eritrociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'emoglobina è una proteina di:</div>
+            <div class="answer">Trasporto di ossigeno</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'enzima che coniuga la bilirubina è la:</div>
+            <div class="answer">Glucuronil transferasi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'enzima lipoproteina lipasi idrolizza i trigliceridi a livello:</div>
+            <div class="answer">Dei vasi sanguigni</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'eparina altera la morfologia:</div>
+            <div class="answer">Degli eritrociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'errore può essere definito come la differenza tra:</div>
+            <div class="answer">Il valore misurato e il valore vero</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'esame più indicato per individuare una componente monoclonale è:</div>
+            <div class="answer">L'elettroforesi delle sieroproteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'esercizio fisico comporta uno spostamento dei liquidi dal comparto:</div>
+            <div class="answer">Intravasale a quello Interstiziale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'imprecisione è la misura degli errori:</div>
+            <div class="answer">Casuali</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'iperbilirubinemia pre-epatica è causata da:</div>
+            <div class="answer">Emolisi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ipercalcemia può essere causata da:</div>
+            <div class="answer">Iperparatiroidismo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ipercolesterolemia può essere associata ad un aumento di rischio di:</div>
+            <div class="answer">Malattie cardiovascolari</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'iperkaliemia indica un'alta concentrazione di potassio nel:</div>
+            <div class="answer">Sangue</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ipertrigliceridemia è un fattore di rischio per:</div>
+            <div class="answer">Malattie cardiovascolari</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ipocalcemia indica una bassa concentrazione di calcio nel:</div>
+            <div class="answer">Sangue</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'iponatremia indica una bassa concentrazione di sodio nel:</div>
+            <div class="answer">Sangue</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ittero è dovuto ad un accumulo di bilirubina nei:</div>
+            <div class="answer">Tessuti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'ormone antidiuretico (ADH) agisce principalmente a livello del:</div>
+            <div class="answer">Rene</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'urea è prodotta:</div>
+            <div class="answer">Dal catabolismo delle proteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">L'urea è un prodotto del metabolismo:</div>
+            <div class="answer">Delle proteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La beta 2 microglobulina è presente prevalentemente sulla superficie:</div>
+            <div class="answer">Dei linfociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La bilirubina coniugata è definita anche:</div>
+            <div class="answer">Diretta</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La bilirubina deriva dalla degradazione dell'emoglobina contenuta nei:</div>
+            <div class="answer">Eritrociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La bilirubina non coniugata è definita anche:</div>
+            <div class="answer">Libera</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La bilirubina è una molecola:</div>
+            <div class="answer">Liposolubile</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La bollitura prima di caricare il campione in un gel elettroforetico serve a:</div>
+            <div class="answer">Denaturare le proteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La caffeina è un inibitore della:</div>
+            <div class="answer">Fosfodiesterasi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La calibrazione è:</div>
+            <div class="answer">un'operazione logico-pratica che stabilisce il rapporto tra il segnale e una grandezza
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La capacità di risoluzione di gel segue il seguente ordine:</div>
+            <div class="answer">Acrilamide>Agarosio>Acetato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carbossiemoglobina è l'emoglobina con legato:</div>
+            <div class="answer">Monossido di carbonio</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carenza di biotina provoca problemi a livello di:</div>
+            <div class="answer">Cute e capelli</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carenza di niacina provoca:</div>
+            <div class="answer">Pellagra</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carenza di vitamina B1 provoca:</div>
+            <div class="answer">Beriberi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carenza di vitamina B12 provoca:</div>
+            <div class="answer">Anemia megaloblastica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La carenza di vitamina D provoca:</div>
+            <div class="answer">Osteoporosi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La ceruloplasmina aumenta in seguito a:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La ceruloplasmina è il principale trasportatore del:</div>
+            <div class="answer">Rame</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La clearance della creatinina è un indice della funzione:</div>
+            <div class="answer">Renale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La cobalamina è anche detta vitamina:</div>
+            <div class="answer">B12</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La creatinchinasi è un enzima che catalizza la:</div>
+            <div class="answer">Fosforilazione della creatina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La creatinchinasi è un enzima:</div>
+            <div class="answer">Dimerico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La creatinchinasi, in assenza di patologie, aumenta per:</div>
+            <div class="answer">Esercizio fisico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La creatinina sierica può essere aumentata da:</div>
+            <div class="answer">Attività fisica intensa</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La creatinina è un prodotto del metabolismo:</div>
+            <div class="answer">Della creatina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La densità delle lipoproteine è inversamente proporzionale alla loro:</div>
+            <div class="answer">Quantità di lipidi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La differenza critica o reference change value è il riferimento per valutare se:</div>
+            <div class="answer">La differenza tra due misurazioni di un determinato analita sullo stesso paziente siano
+                statisticamente significative</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La diminuzione degli errori nella fase analitica sono stati raggiunti grazie:</div>
+            <div class="answer">Maggiore standardizzazione delle procedure</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La fase post-post-analitica è:</div>
+            <div class="answer">Esterna al laboratorio di analisi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La ferritina aumenta in caso di:</div>
+            <div class="answer">Infezione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La ferritina è un indice di:</div>
+            <div class="answer">Metabolismo del ferro</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La ferritina è una proteina di deposito del:</div>
+            <div class="answer">Ferro</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La fosfatasi alcalina appartiene alla famiglia delle:</div>
+            <div class="answer">Idrolasi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La fosfatasi alcalina ha come sigla:</div>
+            <div class="answer">ALP</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La fosfatasi alcalina presenta valori superiori alla norma in assenza di patologia
+                durante:</div>
+            <div class="answer">Infanzia</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La fosfatasi alcalina è un indicatore di attività:</div>
+            <div class="answer">Ossea</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La gamma-glutamiltransferasi (GGT) è un indicatore di danno:</div>
+            <div class="answer">Epatobiliare</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La gamma-glutamiltransferasi in condizioni normali presenta livelli più alti:</div>
+            <div class="answer">Negli uomini</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La lattato deidrogenasi (LDH) aumenta in caso di:</div>
+            <div class="answer">Necrosi tissutale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La lattatodeidrogenasi è una proteina:</div>
+            <div class="answer">Tetramerica formata dalla combinazione di due diverse catene polipeptidiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La legge di Lambert Beer esprime:</div>
+            <div class="answer">La proporzionalità tra la concentrazione di una sostanza e l'assorbanza ad una
+                determinata lunghezza d'onda</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La lipoproteina HDL è detta:</div>
+            <div class="answer">Colesterolo buono</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La maggior parte del colesterolo è prodotta dal:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La maggior parte del ferro è presente come:</div>
+            <div class="answer">Emoglobina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La maggior parte dell'ammoniaca nel corpo umano è prodotta dal:</div>
+            <div class="answer">Intestino</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La medicina di laboratorio è una disciplina che contribuisce a definire:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La medicina di precisione prevede che:</div>
+            <div class="answer">I pazienti affetti dalla stessa patologia siano trattati con farmaci diversi a seconda
+                delle peculiarità biologiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La metrologia è la scienza che studia:</div>
+            <div class="answer">Tutti i processi di misurazione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La mioglobina è una proteina presente nel:</div>
+            <div class="answer">Muscolo scheletrico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La misurazione della beta 2-microglobulina fornisce indicazione sul funzionamento:
+            </div>
+            <div class="answer">Renale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La mobilità elettroforetica relativa delle proteine varia in modo lineare in base a:
+            </div>
+            <div class="answer">Logaritmo decimale della massa molecolare relativa</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La PAGE può essere usata per separare le proteine in condizioni:</div>
+            <div class="answer">Denaturanti e Native</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La piridossina è anche detta vitamina:</div>
+            <div class="answer">B6</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La poliacrilamide per polimerizzare necessita di:</div>
+            <div class="answer">Ammonio per solfato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La pressione oncotica è la pressione osmotica esercitata:</div>
+            <div class="answer">Dalle proteine</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La Proteina C Reattiva è una:</div>
+            <div class="answer">Alfa globulina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La proteina C-reattiva è un indice di:</div>
+            <div class="answer">Infiammazione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La riboflavina è anche detta vitamina:</div>
+            <div class="answer">B2</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La separazione libero-legato dovrebbe essere:</div>
+            <div class="answer">Tutte le risposte precedenti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La sideremia misura la concentrazione di ferro:</div>
+            <div class="answer">Nel sangue</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La sigla BAP indica la:</div>
+            <div class="answer">Fosfatasi alcalina ossea</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La taratura è:</div>
+            <div class="answer">un'operazione logico-pratica che stabilisce il rapporto tra il segnale e una grandezza
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La transferrina è prodotta prevalentemente nel:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La transferrina è una proteina che può essere definita anche:</div>
+            <div class="answer">Di trasporto</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La transferrina è una proteina di trasporto del:</div>
+            <div class="answer">Ferro</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La transtiretina è un marcatore di:</div>
+            <div class="answer">Danno epatico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La troponina è un marker specifico per il danno:</div>
+            <div class="answer">Miocardico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La turbidimetria e la nefelometria sono definiti:</div>
+            <div class="answer">Metodi label-free</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La variabilità analitica è dovuta a:</div>
+            <div class="answer">Tutte le risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La via alternativa del complemento è attivata:</div>
+            <div class="answer">Dai lipopolisaccaridi dei batteri</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La via classica del complemento è attivata:</div>
+            <div class="answer">Dal complesso Ag-Ab</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina A è immagazzinata nel:</div>
+            <div class="answer">Fegato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina B1 è anche detta:</div>
+            <div class="answer">Tiamina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina C è anche detta:</div>
+            <div class="answer">Acido ascorbico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina C è importante per la sintesi di:</div>
+            <div class="answer">Collagene</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina E ha attività:</div>
+            <div class="answer">Antiossidante</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La vitamina K è essenziale per:</div>
+            <div class="answer">Coagulazione del sangue</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le amilasi sono degli enzimi coinvolti nella digestione:</div>
+            <div class="answer">Dei carboidrati</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le cellule staminali della linea linfoide danno origine a:</div>
+            <div class="answer">Linfociti</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le gammopatie monoclonali sono dovute:</div>
+            <div class="answer">Alla proliferazione anomala delle plasmacellule</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le gammopatie monoclonali:</div>
+            <div class="answer">Possono essere asintomatiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le lunghezze d'onda utilizzate nelle misurazioni spettrofotometriche:</div>
+            <div class="answer">Sono monocromatiche</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le molecole anfotere hanno carica netta:</div>
+            <div class="answer">Dipende dal pH</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le plasmacellule sono:</div>
+            <div class="answer">Linfociti B</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le proteine si muovono in un gel SDS-PAGE con una velocità:</div>
+            <div class="answer">Inversamente proporzionale alla loro massa</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le variabilità biologiche interindividuali variano:</div>
+            <div class="answer">All'interno della popolazione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Le variabilità della fase pre-analitica sono dovute:</div>
+            <div class="answer">Alla variabilità legata al campione e al paziente</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Lo iodio è necessario per la sintesi degli ormoni:</div>
+            <div class="answer">Tiroidei</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Lo stress pre-prelievo può alterare i livelli:</div>
+            <div class="answer">Delle catecolamine e del cortisolo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Lo zinco è importante per la funzione di:</div>
+            <div class="answer">Insulina</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nei laboratori di analisi non vengono generalmente impiegati:</div>
+            <div class="answer">Nessuna delle risposte</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nei metodi competitivi la quantità di segnale prodotto:</div>
+            <div class="answer">Diminuirà all'aumentare della concentrazione dell'analita</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nei metodi in fase eterogenea è necessario separare:</div>
+            <div class="answer">L'antigene marcato da quello non marcato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nei metodi non competitivi il segnale:</div>
+            <div class="answer">Aumenta all'aumentare della concentrazione dell'analita.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nella CE si utilizza come supporto per la corsa elettroforetica:</div>
+            <div class="answer">Silice</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nella tecnica del Western blot l'incubazione con BSA serve per:</div>
+            <div class="answer">Diminuire i siti aspecifici</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nella tecnica del western blot le proteine sono trasferite su un foglio di:</div>
+            <div class="answer">Nitrocellulosa</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nelle analisi di laboratorio si utilizzano:</div>
+            <div class="answer">Sia anticorpi policlonali che monoclonali</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Nello schema brain-to-brain la richiesta di un esame diagnostico genera e termina:
+            </div>
+            <div class="answer">Nel cervello del clinico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Prima di un prelievo è possibile prendere un caffè:</div>
+            <div class="answer">Non è consigliato</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">SDS-PAGE permette la separazione delle proteine in base alla:</div>
+            <div class="answer">Dimensione</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Si può definire come variazione biologica la fluttuazione che un analita ha rispetto
+                al suo valore:</div>
+            <div class="answer">Omeostatico</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Tipicamente la variabilità intraindividuale è:</div>
+            <div class="answer">Inferiore alla variabilità interindividuale</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Tutte le misurazioni eseguite nei laboratori sono soggette a:</div>
+            <div class="answer">Variabilità biologica e variabilità analitica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un aptene è una molecola che:</div>
+            <div class="answer">È riconosciuta da un anticorpo</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un aumento di acido urico nel sangue causa:</div>
+            <div class="answer">Gotta</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un aumento di emoglobina A2 può essere indicativo di:</div>
+            <div class="answer">Un'emoglobinopatia</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un buon tracciante per immunoistochimica deve avere:</div>
+            <div class="answer">Alta intensità di segnale per unità di massa</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un campione viene definito emolizzato se:</div>
+            <div class="answer">I livelli di emoglobina liberi sono superiori a 0,30 mg/ml</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un campione viene definito lipemico se presenta:</div>
+            <div class="answer">Elevate concentrazioni di lipidi</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un deficit di vitamina B12 porta ad un'anemia:</div>
+            <div class="answer">Megaloblastica</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Un ibridoma si ottiene per fusione tra:</div>
+            <div class="answer">Un linfocita B e una cellula di mieloma</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Una deviazione standard elevata indica che:</div>
+            <div class="answer">L'imprecisione è alta</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Una misurata accurata si ha:</div>
+            <div class="answer">Con esattezza alta e precisione alta</div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <script>
+        // Funzione di ricerca per filtrare domande e risposte
+        document.getElementById('search-bar').addEventListener('input', function () {
+            const searchQuery = this.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.question').innerText.toLowerCase();
+                const answer = item.querySelector('.answer').innerText.toLowerCase();
+
+                if (question.includes(searchQuery) || answer.includes(searchQuery)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
