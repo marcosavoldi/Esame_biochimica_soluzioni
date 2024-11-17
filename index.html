@@ -6,147 +6,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elenco Domande e Risposte</title>
     <style>
-        /* ===========================
+/* ===========================
    Variabili CSS
 =========================== */
-        :root {
-            --primary-color: #0073e6;
-            --secondary-color: #fff;
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --font-family: Arial, sans-serif;
-            --max-width: 800px;
-            --border-radius: 5px;
-            --padding: 1rem;
-            --font-size-base: 1rem;
-            --line-height-base: 1.5;
-        }
+:root {
+    --primary-color: #0073e6; /* Colore originale delle domande */
+    --secondary-color: #fff;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --font-family: Arial, sans-serif;
+    --max-width: 800px;
+    --border-radius: 5px;
+    --padding: 1rem;
+    --font-size-base: 1rem;
+    --line-height-base: 1.5;
 
-        /* ===========================
+    /* Nuove variabili per migliorare la leggibilità */
+    --question-color: #003366; /* Nuovo colore per le domande */
+    --answer-font-weight: bold; /* Aumenta lo spessore del carattere delle risposte */
+    --answer-font-size: 1.2rem; /* Aumenta la dimensione del font delle risposte */
+    --question-font-size: 1.2rem; /* Aumenta la dimensione del font delle domande */
+}
+
+/* ===========================
    Stili Globali
 =========================== */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: var(--font-family);
-            background-color: var(--background-color);
-            margin: 0;
-            padding-top: 70px;
-            font-size: var(--font-size-base);
-            line-height: var(--line-height-base);
-        }
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+    padding-top: 70px;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+}
 
-        h1 {
-            text-align: center;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            margin: 0 0 1rem 0;
-        }
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+    font-weight: bold;
+}
 
-        /* ===========================
+/* ===========================
    Barra di Ricerca
 =========================== */
-        .search-bar-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: var(--primary-color);
-            padding: 0.5rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
+.search-bar-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
 
-        .search-bar-container input[type="text"] {
-            width: 100%;
-            padding: 0.5rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: var(--border-radius);
-        }
+.search-bar-container input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+}
 
-        /* ===========================
+/* ===========================
    Contenitore FAQ
 =========================== */
-        .faq-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 1rem;
-        }
+.faq-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem;
+}
 
-        /* ===========================
+/* ===========================
    Domande e Risposte
 =========================== */
-        .question,
-        .answer {
-            padding: var(--padding);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
+.question,
+.answer {
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+}
 
-        .question {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.question {
+    background-color: var(--question-color); /* Usa il nuovo colore */
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: var(--question-font-size); /* Aumenta la dimensione del font */
+}
 
-        .answer {
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: var(--secondary-color);
-            margin-bottom: 1rem;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-        }
+.answer {
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: var(--secondary-color);
+    margin-bottom: 1rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    font-weight: var(--answer-font-weight); /* Aumenta lo spessore del carattere */
+    font-size: var(--answer-font-size); /* Aumenta la dimensione del font */
+    color: var(--text-color);
+}
 
-        .hidden {
-            display: none;
-        }
+.hidden {
+    display: none;
+}
 
-        /* ===========================
+/* ===========================
    Responsive Design
 =========================== */
-        /* ... */
-
 @media (max-width: 768px) {
     :root {
-        --font-size-base: 1.1rem;
+        --font-size-base: 1.2rem;
         --line-height-base: 1.6;
-        --padding: 1.2rem;
+        --padding: 1.5rem;
+        --answer-font-size: 1.4rem;
+        --question-font-size: 1.4rem;
     }
 
     h1 {
-        font-size: 1.8rem;
-        font-weight: bold;
+        font-size: 2rem;
     }
 
-    .question, .answer {
-        font-weight: normal; /* Reduce font weight for regular text */
+    .search-bar-container input[type="text"] {
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     :root {
-        --font-size-base: 1.2rem;
+        --font-size-base: 1.4rem;
         --line-height-base: 1.7;
         --padding: 1.5rem;
+        --answer-font-size: 1.6rem;
+        --question-font-size: 1.6rem;
     }
 
     h1 {
         font-size: 2.2rem;
-        font-weight: bold;
     }
 
-    .question, .answer {
-        font-weight: normal; /* Reduce font weight for regular text */
+    .search-bar-container input[type="text"] {
+        font-size: 1.3rem;
     }
 }
-
-    </style>
+</style>
 </head>
 
 <body>
