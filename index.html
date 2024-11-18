@@ -2545,6 +2545,20 @@ function saveToLocalStorage() {
     console.log('Dati salvati nel Local Storage.');
 }
 
+// Funzione per salvare i dati nel Local Storage
+function saveToLocalStorage() {
+    const faqContainer = document.getElementById('faq-container');
+    const faqItems = faqContainer.querySelectorAll('.faq-item');
+
+    const data = Array.from(faqItems).map(item => ({
+        question: item.querySelector('.question').innerText,
+        answer: item.querySelector('.answer').innerText
+    }));
+
+    localStorage.setItem('faqData', JSON.stringify(data));
+    console.log('Dati salvati nel Local Storage.');
+}
+
 // Funzione per caricare i dati dal Local Storage
 function loadFromLocalStorage() {
     const savedData = localStorage.getItem('faqData');
@@ -2579,6 +2593,35 @@ function loadFromLocalStorage() {
     }
 }
 
+// Funzione per creare i collegamenti delle lettere
+function createAlphabetLinks() {
+    const alphabetContainer = document.createElement('div');
+    alphabetContainer.id = 'alphabet-container';
+    const faqContainer = document.getElementById('faq-container');
+    faqContainer.parentNode.insertBefore(alphabetContainer, faqContainer);
+
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    alphabet.split('').forEach(letter => {
+        const link = document.createElement('a');
+        link.href = `#letter-${letter}`;
+        link.innerText = letter;
+        link.style.marginRight = '10px';
+        link.addEventListener('click', () => scrollToLetter(letter));
+        alphabetContainer.appendChild(link);
+    });
+}
+
+// Funzione per collegare le lettere alle domande
+function scrollToLetter(letter) {
+    const faqItems = document.querySelectorAll('.faq-item');
+    for (let item of faqItems) {
+        if (item.querySelector('.question').innerText.trim().startsWith(letter)) {
+            item.scrollIntoView({ behavior: 'smooth' });
+            break;
+        }
+    }
+}
+
 // Funzione per gestire la visualizzazione delle risposte
 function setupFAQToggle() {
     const questions = document.querySelectorAll('.question');
@@ -2593,6 +2636,7 @@ function setupFAQToggle() {
 // Inizializza la pagina
 document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
+    createAlphabetLinks(); // Ricrea le lettere cliccabili
     setupFAQToggle();
     saveToLocalStorage();
 });
