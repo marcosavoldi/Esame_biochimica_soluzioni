@@ -2531,115 +2531,101 @@
             });
         })();
         
-        // Funzione per salvare i dati nel Local Storage
-function saveToLocalStorage() {
-    const faqContainer = document.getElementById('faq-container');
-    const faqItems = faqContainer.querySelectorAll('.faq-item');
-
-    const data = Array.from(faqItems).map(item => ({
-        question: item.querySelector('.question').innerText,
-        answer: item.querySelector('.answer').innerText
-    }));
-
-    localStorage.setItem('faqData', JSON.stringify(data));
-    console.log('Dati salvati nel Local Storage.');
-}
-
-// Funzione per salvare i dati nel Local Storage
-function saveToLocalStorage() {
-    const faqContainer = document.getElementById('faq-container');
-    const faqItems = faqContainer.querySelectorAll('.faq-item');
-
-    const data = Array.from(faqItems).map(item => ({
-        question: item.querySelector('.question').innerText,
-        answer: item.querySelector('.answer').innerText
-    }));
-
-    localStorage.setItem('faqData', JSON.stringify(data));
-    console.log('Dati salvati nel Local Storage.');
-}
-
-// Funzione per caricare i dati dal Local Storage
-function loadFromLocalStorage() {
-    const savedData = localStorage.getItem('faqData');
-    if (savedData) {
+        
+    // Funzione per salvare i dati nel Local Storage
+    function saveToLocalStorage() {
         const faqContainer = document.getElementById('faq-container');
-        const data = JSON.parse(savedData);
+        const faqItems = faqContainer.querySelectorAll('.faq-item');
 
-        // Svuota il contenitore FAQ
-        faqContainer.innerHTML = '';
+        const data = Array.from(faqItems).map(item => {
+            const question = item.querySelector('.question');
+            const answer = item.querySelector('.answer');
 
-        // Ricrea le domande e risposte dal Local Storage
-        data.forEach(item => {
-            const faqItem = document.createElement('div');
-            faqItem.className = 'faq-item';
-
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            questionDiv.innerText = item.question;
-
-            const answerDiv = document.createElement('div');
-            answerDiv.className = 'answer';
-            answerDiv.innerText = item.answer;
-
-            faqItem.appendChild(questionDiv);
-            faqItem.appendChild(answerDiv);
-            faqContainer.appendChild(faqItem);
+            return {
+                questionText: question.innerText,
+                answerText: answer.innerText,
+                questionId: question.id || null // Preserva l'ID della domanda
+            };
         });
 
-        console.log('Dati caricati dal Local Storage.');
-    } else {
-        console.log('Nessun dato trovato nel Local Storage.');
+        localStorage.setItem('faqData', JSON.stringify(data));
+        console.log('Dati salvati nel Local Storage.');
     }
-}
 
-// Funzione per creare i collegamenti delle lettere
-function createAlphabetLinks() {
-    const alphabetContainer = document.createElement('div');
-    alphabetContainer.id = 'alphabet-container';
-    const faqContainer = document.getElementById('faq-container');
-    faqContainer.parentNode.insertBefore(alphabetContainer, faqContainer);
+    // Funzione per caricare i dati dal Local Storage
+    function loadFromLocalStorage() {
+        const savedData = localStorage.getItem('faqData');
+        if (savedData) {
+            const faqContainer = document.getElementById('faq-container');
+            const data = JSON.parse(savedData);
 
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    alphabet.split('').forEach(letter => {
-        const link = document.createElement('a');
-        link.href = `#letter-${letter}`;
-        link.innerText = letter;
-        link.style.marginRight = '10px';
-        link.addEventListener('click', () => scrollToLetter(letter));
-        alphabetContainer.appendChild(link);
-    });
-}
+            // Svuota il contenitore FAQ
+            faqContainer.innerHTML = '';
 
-// Funzione per collegare le lettere alle domande
-function scrollToLetter(letter) {
-    const faqItems = document.querySelectorAll('.faq-item');
-    for (let item of faqItems) {
-        if (item.querySelector('.question').innerText.trim().startsWith(letter)) {
-            item.scrollIntoView({ behavior: 'smooth' });
-            break;
+            // Ricrea le domande e risposte dal Local Storage
+            data.forEach(item => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerText = item.questionText;
+                if (item.questionId) {
+                    questionDiv.id = item.questionId; // Reimposta l'ID della domanda
+                }
+
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'answer';
+                answerDiv.innerText = item.answerText;
+
+                faqItem.appendChild(questionDiv);
+                faqItem.appendChild(answerDiv);
+                faqContainer.appendChild(faqItem);
+            });
+
+            console.log('Dati caricati dal Local Storage.');
+        } else {
+            console.log('Nessun dato trovato nel Local Storage.');
         }
     }
-}
 
-// Funzione per gestire la visualizzazione delle risposte
-function setupFAQToggle() {
-    const questions = document.querySelectorAll('.question');
-    questions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+    // Funzione per assegnare gli ID alle domande (se non già presenti)
+    function assignQuestionIds() {
+        const faqItems = document.querySelectorAll('.faq-item .question');
+        const lettersFound = {};
+
+        faqItems.forEach(question => {
+            const firstLetter = question.innerText.trim().charAt(0).toUpperCase();
+            if (!lettersFound[firstLetter]) {
+                lettersFound[firstLetter] = true;
+                question.id = 'letter-' + firstLetter;
+            }
         });
-    });
-}
+    }
 
-// Inizializza la pagina
-document.addEventListener('DOMContentLoaded', () => {
-    loadFromLocalStorage();
-    createAlphabetLinks(); // Ricrea le lettere cliccabili
-    setupFAQToggle();
-    saveToLocalStorage();
-});
+    // Funzione per gestire la visualizzazione delle risposte
+    function setupFAQToggle() {
+        const answers = document.querySelectorAll('.answer');
+        answers.forEach(answer => {
+            answer.style.display = 'none'; // Nasconde tutte le risposte all'inizio
+        });
+
+        const questions = document.querySelectorAll('.question');
+        questions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    }
+
+    // Inizializza la pagina
+    document.addEventListener('DOMContentLoaded', () => {
+        loadFromLocalStorage();
+        assignQuestionIds(); // Assegna gli ID alle domande
+        setupFAQToggle();
+        saveToLocalStorage();
+    });
         
     </script>
 
