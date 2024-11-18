@@ -2530,6 +2530,73 @@
                 }
             });
         })();
+        
+        // Funzione per salvare i dati nel Local Storage
+function saveToLocalStorage() {
+    const faqContainer = document.getElementById('faq-container');
+    const faqItems = faqContainer.querySelectorAll('.faq-item');
+
+    const data = Array.from(faqItems).map(item => ({
+        question: item.querySelector('.question').innerText,
+        answer: item.querySelector('.answer').innerText
+    }));
+
+    localStorage.setItem('faqData', JSON.stringify(data));
+    console.log('Dati salvati nel Local Storage.');
+}
+
+// Funzione per caricare i dati dal Local Storage
+function loadFromLocalStorage() {
+    const savedData = localStorage.getItem('faqData');
+    if (savedData) {
+        const faqContainer = document.getElementById('faq-container');
+        const data = JSON.parse(savedData);
+
+        // Svuota il contenitore FAQ
+        faqContainer.innerHTML = '';
+
+        // Ricrea le domande e risposte dal Local Storage
+        data.forEach(item => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerText = item.question;
+
+            const answerDiv = document.createElement('div');
+            answerDiv.className = 'answer';
+            answerDiv.innerText = item.answer;
+
+            faqItem.appendChild(questionDiv);
+            faqItem.appendChild(answerDiv);
+            faqContainer.appendChild(faqItem);
+        });
+
+        console.log('Dati caricati dal Local Storage.');
+    } else {
+        console.log('Nessun dato trovato nel Local Storage.');
+    }
+}
+
+// Funzione per gestire la visualizzazione delle risposte
+function setupFAQToggle() {
+    const questions = document.querySelectorAll('.question');
+    questions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+}
+
+// Inizializza la pagina
+document.addEventListener('DOMContentLoaded', () => {
+    loadFromLocalStorage();
+    setupFAQToggle();
+    saveToLocalStorage();
+});
+        
     </script>
 
 </body>
